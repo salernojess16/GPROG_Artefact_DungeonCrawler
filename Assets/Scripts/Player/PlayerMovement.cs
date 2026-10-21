@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        // initualise creference
+        // initualise reference
         rb = this.GetComponent<Rigidbody2D>();
         playerStats = this.GetComponent<PlayerStats>();
     }
@@ -21,13 +21,10 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal"); //input
         float vertical = Input.GetAxisRaw("Vertical");
 
-       
-
         movement = new Vector2(horizontal, vertical).normalized;
     }
 
-
-    //fixed update fopr physics movement 
+ 
     private void FixedUpdate()
     {
         if (playerStats == null) return;
