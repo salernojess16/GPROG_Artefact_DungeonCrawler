@@ -1,16 +1,29 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class FollowPlayer : ICameraStrategy
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Transform player; //reference the player so it knows what to follow 
+
+    private Vector3 offset = new Vector3(0, 2, -10); //offset so its not directly on the player
+
+    private float lerpSpeed = 5f;
+
+
+   
+    public void UpdateCamera(Camera camera)
     {
-        
+        //use lerp to gradually move 
+
+        Vector3 targetPosition = player.position + offset;
+
+        camera.transform.position = Vector3.Lerp(camera.transform.position, targetPosition, lerpSpeed * Time.deltaTime);
+    //change position of the camera to target position whilst using a lerp to make it move gradually and not instantly 
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public FollowPlayer(Transform player)
     {
-        
+        this.player = player;
     }
+
 }

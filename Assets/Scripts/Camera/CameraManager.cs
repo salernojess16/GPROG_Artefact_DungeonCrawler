@@ -3,21 +3,32 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    private ICameraInterface currentStrategy;
+    private ICameraStrategy currentStrategy;
     public Transform player;
+    public Camera gameCamera;
 
 
 
-
-    private void Update()
+    private void Start()
     {
-        // how to know when to switch the camera stratergies 
+        SetStrategy(new FollowPlayer(player));
+    }
+    private void LateUpdate()    //changed to lateupdate become the player was flickering strangely 
+    {
+        UpdateCamera();
+    }
+    private void UpdateCamera()  // check if strategy has been assigned 
+    {
+        if (currentStrategy != null)
+        {
+            currentStrategy.UpdateCamera(gameCamera);   //update camera 
+        }
     }
 
 
 
-    //switch between different behaviours
-    public void SetStrategy(ICameraInterface Strategy)
+    
+    public void SetStrategy(ICameraStrategy Strategy)  //change which camera is being used
     {
 
         currentStrategy = Strategy;
