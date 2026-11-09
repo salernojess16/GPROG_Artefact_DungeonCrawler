@@ -9,11 +9,11 @@ public class CameraManager : MonoBehaviour
 
 
 
-    private void Start()
+    private void Start() //makinng followplayer the first when game starts
     {
         SetStrategy(new FollowPlayer(player));
     }
-    private void LateUpdate()    //changed to lateupdate become the player was flickering strangely 
+    private void LateUpdate()    //changed to lateupdate become the player was flickering strangely didntwork but read up its better this way anyway. change rigidbody to interpelaate to fix it aswell 
     {
         UpdateCamera();
     }
