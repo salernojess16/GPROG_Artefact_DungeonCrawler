@@ -4,9 +4,9 @@ public class FollowPlayer : ICameraStrategy
 {
     private Transform player; //reference the player so it knows what to follow 
 
-    private Vector3 offset = new Vector3(0, 2, -10); //offset so its not directly on the player
+    private Vector3 offset = new Vector3(0, 2, -3); //offset so its not directly on the player
 
-    private float lerpSpeed = 5f;
+    public float lerpSpeed = 2f;
 
 
    
