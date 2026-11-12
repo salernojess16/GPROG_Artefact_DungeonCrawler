@@ -6,7 +6,7 @@ public class EPatrol : EIstate
     private Rigidbody2D rb;
     private EnemyStats enemyStats;
 
-    private float patrolDistance = 3f;
+    private float patrolDistance = 1f;
     private Vector2 PointA;
     private Vector2 PointB;
 
