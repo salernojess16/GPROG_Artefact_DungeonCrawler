@@ -1,16 +1,24 @@
 using UnityEngine;
 
-public class EDeath : MonoBehaviour
+public class EDeath : EIstate
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private Rigidbody2D rb;
+    private EnemyStats enemyStats;
 
-    // Update is called once per frame
-    void Update()
+    //constructor to pass through references
+    public EDeath(Rigidbody2D rb, EnemyStats enemyStats)
     {
-        
+        this.rb = rb;                      //this refers to the variable Belonging here
+        this.enemyStats = enemyStats;
     }
+    public void Enter()
+    { }
+
+    public void Execute()
+    { }
+
+    public void Exit()
+    { }
+
+
 }

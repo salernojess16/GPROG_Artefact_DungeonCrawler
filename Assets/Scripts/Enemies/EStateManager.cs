@@ -2,8 +2,15 @@ using UnityEngine;
 
 public class EnemyStateManager : MonoBehaviour
 {
-    public Rigidbody2D rb;              //reference to the physical body and stats for state scripts to reference
+    public Rigidbody2D rb;              //references for state scripts to reference
     public EnemyStats enemyStats;
+    private Transform Player;
+    private PlayerStats playerStats;
+
+    public float playerDistance = 2f;
+
+
+    
     public EIstate CurrentState { get; private set; }
     // current state 
 
@@ -12,6 +19,7 @@ public class EnemyStateManager : MonoBehaviour
 
 
     private EPatrol patrolState;
+    private EAttack attackState;
 
 
     public void Awake()
@@ -19,9 +27,12 @@ public class EnemyStateManager : MonoBehaviour
         //initialise the rb and stats and states 
         enemyStats= GetComponent<EnemyStats>();
         rb = GetComponent<Rigidbody2D>();
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerStats = Player.GetComponent<PlayerStats>();
 
 
         patrolState = new EPatrol(rb, enemyStats);
+        attackState = new EAttack(rb, enemyStats, Player, playerStats);
         ChangeStateCheck(patrolState);
 
     }
@@ -53,11 +64,26 @@ public class EnemyStateManager : MonoBehaviour
             CurrentState.Enter();
 
         transitioning = false;
-    }
+    }z
+
 
     // pass update to states - not a monobehaviour 
     public void FixedUpdate()
     {
+        //check if player is close enough to activate attack state
+        float DistanceToPlayer = Vector2.Distance(rb.position, Player.position); //distance from enemy to player
+    
+
+        if (DistanceToPlayer < playerDistance)
+        {
+            ChangeStateCheck(attackState);
+        }
+        else
+        {
+            ChangeStateCheck(patrolState);
+        }
+
+
         if (CurrentState != null && !transitioning)
             CurrentState.Execute();
         

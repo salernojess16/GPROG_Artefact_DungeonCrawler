@@ -30,6 +30,9 @@ public class EPatrol : EIstate
         PointB = new Vector2(rb.position.x + patrolDistance, rb.position.y);
 
         target = PointA;
+
+        isPausing = false;
+        pauseTimer = 0f;
     }
     public void Execute()
     {

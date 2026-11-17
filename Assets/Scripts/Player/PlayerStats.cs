@@ -6,11 +6,17 @@ public class PlayerStats : MonoBehaviour
 
     public float speed = 5f;
     public float hp = 100f;
+    private float damage = 10f;
 
 
     public float GetSpeed()
     {
         return speed;
+    }
+
+    public void TakeDamage()
+    {
+        hp -= damage;
     }
 
   
