@@ -46,7 +46,7 @@ public class EnemyStateManager : MonoBehaviour
                                     //based approach 
     }
 
-
+    
     private void ChangeState(EIstate newState)
     {
         //actual changestate logic
@@ -64,7 +64,7 @@ public class EnemyStateManager : MonoBehaviour
             CurrentState.Enter();
 
         transitioning = false;
-    }z
+    }
 
 
     // pass update to states - not a monobehaviour 
