@@ -72,7 +72,7 @@ public class EnemyStateManager : MonoBehaviour
     {
         //check if player is close enough to activate attack state
         float DistanceToPlayer = Vector2.Distance(rb.position, Player.position); //distance from enemy to player
-    
+        Debug.Log(rb.linearVelocity);
 
         if (DistanceToPlayer < playerDistance)
         {

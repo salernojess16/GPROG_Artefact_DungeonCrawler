@@ -9,14 +9,44 @@ public class EnemyStats : MonoBehaviour
     //cooldown speed 
     public float attackDamage = 10;
 
-    
+    public bool isKnockedback = false;
+    private float knockbackTimer;
+    public float knockbackLength = 0.2f;
+    public float knockbackForce = 4f;
 
-    public void TakeDamage()
+    private Rigidbody2D rb;
+
+      void Start()
     {
-        hp -= damage;
-        //pop up text 
-
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
+    private void FixedUpdate()
+    {
+        if (knockbackTimer > 0)
+        {
+            knockbackTimer -= Time.fixedDeltaTime;
+
+
+            if (knockbackTimer <= 0)
+
+                isKnockedback = false;
+        }
+    }
+
+
+    public void TakeDamage(Vector2 playerPosition)
+    {
+         hp -= damage;
+
+
+        Vector2 knockbackDirection = ((Vector2)transform.position - playerPosition).normalized; //knockback in the right direction
+        rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse); //actual knockback
+        isKnockedback = true;
+        knockbackTimer = knockbackLength;
+    }
+
+
 }
+
+

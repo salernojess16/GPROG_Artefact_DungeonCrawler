@@ -9,11 +9,11 @@ public class EAttack : EIstate
     private PlayerStats playerStats;
 
     private bool playerInRange = false;
-    public float attackrange = 1.5f;
+    public float attackrange = 1f;
     public float cooldown = 2f;
     private float cooldownTimer;
     private Transform target;
-    
+
 
 
     //constructor to pass through references
@@ -36,35 +36,43 @@ public class EAttack : EIstate
             cooldownTimer -= Time.fixedDeltaTime; //make the cooldown count down 
         }
 
-        float distanceFromPlayer = Vector2.Distance(rb.position, target.position);//calculate distance from player
-        playerInRange = distanceFromPlayer <= attackrange; // if player is range set to true or false if its not
+        if (!enemyStats.isKnockedback)
 
-        //if player is in range to attack 
-        if (playerInRange)
         {
+            float distanceFromPlayer = Vector2.Distance(rb.position, target.position);//calculate distance from player
+            playerInRange = distanceFromPlayer <= attackrange; // if player is range set to true or false if its not
 
-            if (cooldownTimer <= 0)
+            //if player is in range to attack 
+            if (playerInRange)
             {
-                Attack();
+
+                if (cooldownTimer <= 0)
+                {
+                    Attack();
+                }
+
+            }
+            else // if not chase the  player
+            {
+                Vector2 playerPosition = new Vector2(target.position.x, target.position.y);
+                Vector2 newPosition = Vector2.MoveTowards(rb.position, playerPosition, enemyStats.speed * Time.fixedDeltaTime);
+
+                rb.MovePosition(newPosition);
             }
 
         }
-        else // if not chase the  player
-        {
-            Vector2 playerPosition = new Vector2(target.position.x, target.position.y);
-            Vector2 newPosition = Vector2.MoveTowards(rb.position, playerPosition, enemyStats.speed * Time.fixedDeltaTime);
 
-            rb.MovePosition(newPosition);
+
         }
-    }
 
     public void Exit()
     { }
 
-    private void Attack() 
+    private void Attack()
     {
+        rb.linearVelocity = Vector2.zero; //stop mevement 
         //attack player 
-        playerStats.TakeDamage();
+        playerStats.TakeDamage(rb.position);
         cooldownTimer = cooldown;
     }
 

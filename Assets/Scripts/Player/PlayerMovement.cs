@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (cooldownTimer > 0)
         {
-            cooldownTimer -= Time.fixedDeltaTime; //make the cooldown count down 
+            cooldownTimer -= Time.deltaTime; //make the cooldown count down 
             //Debug.Log(cooldownTimer);
         }
 
@@ -50,7 +50,12 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (playerStats == null) return;
-        movePlayer(movement);
+
+        //only move if its not knockbacked
+        if (!playerStats.isKnockedback)
+        {
+            movePlayer(movement);
+        }
     }
 
 
@@ -70,11 +75,12 @@ public class PlayerMovement : MonoBehaviour
 
             if (enemyStats != null) //if it has this,its an enemy, carry out take damage 
             {
-                enemyStats.TakeDamage();
+                enemyStats.TakeDamage(transform.position);
                 Debug.Log("hit enemy");
 
-                //popup text 
-
+                
+                cooldownTimer = cooldown; //reset timer only when hit enemy
+                //popup text
                 Vector2 randomOffset = Random.insideUnitCircle * 1f;
               GameObject popUp = Instantiate(popUpPrefab, (Vector2)enemy.transform.position+randomOffset, Quaternion.identity);
                 popUp.GetComponentInChildren<TMP_Text>().text = enemyStats.damage.ToString();
@@ -82,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //change sprite or whatever later when i figure this out 
-        cooldownTimer = cooldown;
+       
       
 
     }

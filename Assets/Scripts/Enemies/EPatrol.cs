@@ -25,6 +25,8 @@ public class EPatrol : EIstate
     }
     public void Enter()
     {
+        rb.linearVelocity = Vector2.zero; //reset movement to stop weird bug
+
         //set up point a and b
         PointA = new Vector2(rb.position.x - patrolDistance, rb.position.y);
         PointB = new Vector2(rb.position.x + patrolDistance, rb.position.y);
@@ -36,45 +38,48 @@ public class EPatrol : EIstate
     }
     public void Execute()
     {
-        
-        if (Vector2.Distance(rb.position, target) < 0.1f)   //check if its reached its target 
+        if (!enemyStats.isKnockedback)
+
         {
-            //pause logic 
-            if (!isPausing)
+            if (Vector2.Distance(rb.position, target) < 0.1f)   //check if its reached its target 
             {
-                isPausing = true;
-                pauseTimer = pauseTime;
-            }
-
-            if (isPausing)
-            {
-                pauseTimer -= Time.fixedDeltaTime;
-            }
-
-            if (pauseTimer <= 0)
-
-            {
-                //switch directions
-                if (target == PointA)
+                //pause logic 
+                if (!isPausing)
                 {
-                    target = PointB;
-                }
-                else
-                {
-                    target = PointA;
+                    isPausing = true;
+                    pauseTimer = pauseTime;
                 }
 
-                isPausing = false;
+                if (isPausing)
+                {
+                    pauseTimer -= Time.fixedDeltaTime;
+                }
+
+                if (pauseTimer <= 0)
+
+                {
+                    //switch directions
+                    if (target == PointA)
+                    {
+                        target = PointB;
+                    }
+                    else
+                    {
+                        target = PointA;
+                    }
+
+                    isPausing = false;
+                }
             }
-        }
-        //not pausing normal movement 
-        else if (!isPausing)
-        {
-            //move around betwen patrol points 
+            //not pausing normal movement 
+            else if (!isPausing)
+            {
+                //move around betwen patrol points 
 
-            Vector2 newPosition = Vector2.MoveTowards(rb.position, target, enemyStats.speed * Time.fixedDeltaTime);
+                Vector2 newPosition = Vector2.MoveTowards(rb.position, target, enemyStats.speed * Time.fixedDeltaTime);
 
-            rb.MovePosition(newPosition);
+                rb.MovePosition(newPosition);
+            }
         }
     }
 
