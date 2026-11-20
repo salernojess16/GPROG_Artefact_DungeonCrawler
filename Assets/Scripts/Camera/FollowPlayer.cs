@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class FollowPlayer : ICameraStrategy
 {
-    private Transform player; //reference the player so it knows what to follow 
+    private Transform player; //reference the player 
 
-    private Vector3 offset = new Vector3(0, 2, -3); //offset so its not directly on the player
+    private Vector3 offset = new Vector3(0, 2, -3); //offset 
 
     public float lerpSpeed = 2f;
 
