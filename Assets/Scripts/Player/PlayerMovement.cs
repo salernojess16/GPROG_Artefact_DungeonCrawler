@@ -11,9 +11,9 @@ public class PlayerMovement : MonoBehaviour
 
     private EnemyStats enemyStats;
 
-    public float cooldown = 2f;
+    public float cooldown = 0.5f;
     private float cooldownTimer;
-    public float attackrange = 1.5f;
+    public float attackrange = 2f;
 
     public GameObject popUpPrefab;
 
@@ -66,24 +66,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void Attack()
     {
-        //check if there is an enemy 
-        Collider2D enemy = Physics2D.OverlapCircle(transform.position, attackrange);
+        cooldownTimer = cooldown; //reset timer
+        //check for enemies in an array
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, attackrange);
         //collioded with something, retrieve this if it has it
-        if (enemy != null)
+        foreach (Collider2D enemy in enemies)
         {
             enemyStats = enemy.GetComponent<EnemyStats>();
 
             if (enemyStats != null) //if it has this,its an enemy, carry out take damage 
             {
+                Debug.Log("Detected: ");
                 enemyStats.TakeDamage(transform.position);
-                Debug.Log("hit enemy");
-
                 
-                cooldownTimer = cooldown; //reset timer only when hit enemy
+               
                 //popup text
                 Vector2 randomOffset = Random.insideUnitCircle * 1f;
               GameObject popUp = Instantiate(popUpPrefab, (Vector2)enemy.transform.position+randomOffset, Quaternion.identity);
                 popUp.GetComponentInChildren<TMP_Text>().text = enemyStats.damage.ToString();
+
+                break;
             }
         }
 

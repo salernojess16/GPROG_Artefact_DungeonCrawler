@@ -6,6 +6,8 @@ public class EnemyStateManager : MonoBehaviour
     public EnemyStats enemyStats;
     private Transform Player;
     private PlayerStats playerStats;
+    public GameObject coinPrefab;
+    
 
     public float playerDistance = 2f;
 
@@ -20,6 +22,7 @@ public class EnemyStateManager : MonoBehaviour
 
     private EPatrol patrolState;
     private EAttack attackState;
+    private EDeath deathState;
 
 
     public void Awake()
@@ -33,6 +36,7 @@ public class EnemyStateManager : MonoBehaviour
 
         patrolState = new EPatrol(rb, enemyStats);
         attackState = new EAttack(rb, enemyStats, Player, playerStats);
+        deathState = new EDeath(rb, enemyStats, coinPrefab);
         ChangeStateCheck(patrolState);
 
     }
@@ -72,7 +76,7 @@ public class EnemyStateManager : MonoBehaviour
     {
         //check if player is close enough to activate attack state
         float DistanceToPlayer = Vector2.Distance(rb.position, Player.position); //distance from enemy to player
-        Debug.Log(rb.linearVelocity);
+        
 
         if (DistanceToPlayer < playerDistance)
         {
@@ -83,9 +87,18 @@ public class EnemyStateManager : MonoBehaviour
             ChangeStateCheck(patrolState);
         }
 
+        if (enemyStats.hp <= 0)
+
+        {
+            ChangeStateCheck(deathState);
+        }
+
+
 
         if (CurrentState != null && !transitioning)
             CurrentState.Execute();
+
+       
         
     }
 
