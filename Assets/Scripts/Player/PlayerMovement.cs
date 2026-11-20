@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float cooldown = 0.5f;
     private float cooldownTimer;
     public float attackrange = 2f;
+    public AudioSource sound;
 
     public GameObject popUpPrefab;
 
@@ -66,7 +67,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Attack()
     {
-        cooldownTimer = cooldown; //reset timer
+        
+        sound.Play();
         //check for enemies in an array
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, attackrange);
         //collioded with something, retrieve this if it has it
@@ -76,7 +78,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (enemyStats != null) //if it has this,its an enemy, carry out take damage 
             {
-                Debug.Log("Detected: ");
+                //Debug.Log("Detected: ");
+                cooldownTimer = cooldown; //reset timer
                 enemyStats.TakeDamage(transform.position);
                 
                

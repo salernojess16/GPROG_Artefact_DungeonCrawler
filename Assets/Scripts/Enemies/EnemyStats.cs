@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
@@ -14,11 +15,14 @@ public class EnemyStats : MonoBehaviour
     public float knockbackLength = 0.2f;
     public float knockbackForce = 4f;
 
+    public AudioSource sound;
+
     private Rigidbody2D rb;
 
       void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     private void FixedUpdate()
@@ -39,7 +43,7 @@ public class EnemyStats : MonoBehaviour
     {
          hp -= damage;
 
-
+        sound.Play();
         Vector2 knockbackDirection = ((Vector2)transform.position - playerPosition).normalized; //knockback in the right direction
         rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse); //actual knockback
         isKnockedback = true;

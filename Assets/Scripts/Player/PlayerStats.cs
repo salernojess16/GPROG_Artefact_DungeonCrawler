@@ -13,6 +13,8 @@ public class PlayerStats : MonoBehaviour
     public float knockbackLength = 0.5f;
     public float knockbackForce = 8f;
 
+    public AudioSource hurtSound;
+
     private Rigidbody2D rb;
 
     void Start()
@@ -42,12 +44,14 @@ public float GetSpeed()
 
     public void TakeDamage(Vector2 enemyPosition)
     {
+       
         hp -= damage;
         Vector2 knockbackDirection = ((Vector2)transform.position - enemyPosition).normalized; //knockback in the right direction
         rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse); //actual knockback
         isKnockedback = true;
         knockbackTimer = knockbackLength;
-}
+        hurtSound.Play();
+    }
 
   
 }
