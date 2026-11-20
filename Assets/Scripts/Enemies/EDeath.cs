@@ -21,9 +21,9 @@ public class EDeath : EIstate
     public void Execute()
     {
         Object.Instantiate(coinPrefab, rb.position, Quaternion.identity); //spawn coin where the rb is/was . //used trasnform w=instead of position, was deleted because of destroy 
-        Debug.Log("coin spawned");
+        
         Object.Destroy(rb.gameObject); //had a problem with this for a while, it isn't a monobehaviour so i couldnt use destroy function, object destroy says to destroy the game object the rb is referring to. same problem with the instantiate.
-        Debug.Log("rb destroyed");
+       
     }
 
     public void Exit()
