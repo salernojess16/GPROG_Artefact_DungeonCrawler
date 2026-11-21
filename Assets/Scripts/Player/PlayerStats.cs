@@ -13,6 +13,8 @@ public class PlayerStats : MonoBehaviour
     public float knockbackLength = 0.5f;
     public float knockbackForce = 8f;
 
+    public bool isDead = false;
+
     public AudioSource hurtSound;
 
     private Rigidbody2D rb;
@@ -33,6 +35,13 @@ public class PlayerStats : MonoBehaviour
         if (knockbackTimer <= 0) 
         
             isKnockedback = false;
+        }
+
+        if (hp < 0 && !isDead)
+        {
+
+            isDead = true;
+
         }
     }
    
