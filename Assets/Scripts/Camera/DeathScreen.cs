@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DeathScreen : ICameraStrategy
 {
-    public float lerpSpeed = 0.75f;
+    public float lerpSpeed = 1.25f;
     private float ZoomOutAmount = 6f;
     private float zoom;
     private float MaxZoomedOut = 6f;

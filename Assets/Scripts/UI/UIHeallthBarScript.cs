@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class HeallthBarScript : MonoBehaviour
+public class UIHeallthBarScript : MonoBehaviour
 {
     public Slider healthBarSlider;
     public PlayerStats playerStats;
