@@ -37,7 +37,7 @@ public class PlayerStats : MonoBehaviour
             isKnockedback = false;
         }
 
-        if (hp < 0 && !isDead)
+        if (hp <= 0 && !isDead)
         {
 
             isDead = true;

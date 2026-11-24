@@ -20,7 +20,7 @@ public class UIDeathScreen : MonoBehaviour
         if (playerStats.isDead)
         {
             Color imageColour = image.color;
-            imageColour.a = 0.1f;
+            imageColour.a = 0.3f;
             image.color = imageColour;
         }
         else
