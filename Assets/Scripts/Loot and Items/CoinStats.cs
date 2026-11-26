@@ -19,6 +19,7 @@ public class CoinStats : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D Player)
     {
+        sound.pitch = Random.Range(0.8f, 1.2f);
         AudioSource.PlayClipAtPoint(sound.clip,transform.position);
         Destroy(gameObject);
     }

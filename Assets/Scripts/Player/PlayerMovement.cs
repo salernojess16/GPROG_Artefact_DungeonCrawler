@@ -1,5 +1,6 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerMovement : MonoBehaviour
 
@@ -67,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Attack()
     {
-        
+        sound.pitch = Random.Range(0.8f, 1.2f);
         sound.Play();
         //check for enemies in an array
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, attackrange);

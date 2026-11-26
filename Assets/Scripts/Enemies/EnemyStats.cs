@@ -42,7 +42,7 @@ public class EnemyStats : MonoBehaviour
     public void TakeDamage(Vector2 playerPosition)
     {
          hp -= damage;
-
+        sound.pitch = Random.Range(0.8f, 1.2f);
         sound.Play();
         Vector2 knockbackDirection = ((Vector2)transform.position - playerPosition).normalized; //knockback in the right direction
         rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse); //actual knockback
