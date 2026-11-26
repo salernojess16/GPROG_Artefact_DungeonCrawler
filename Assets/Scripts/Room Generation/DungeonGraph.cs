@@ -18,28 +18,28 @@ public class DungeonGraph
        //increases the rooms
     }
 
-    public void AddEdge(int from, int to) //add an edge (hallway) between rooms    //need to figure out how to use id to find the roomconnections
+    public void AddEdge(int from, int to) //add an edge (hallway) between rooms 
     {
-        var FromList = Find(from);
-        var toNode = Find(to)?.First;
+        var FromRoom = Find(from);
+        var toRoom = Find(to);
 
-        if (FromList != null && toNode != null)
+        if (FromRoom != null && toRoom != null)
         {
-            FromList.AddLast(toNode.Value);
+            FromRoom.connections.AddLast(toRoom); //a one way connection from room to another room  add edge adds a connection between the two rooms
         }
 
     }
 
    
 
-    public LinkedList<RoomNode> Find(RoomNode.roomType room) // find what rooms connect via edges
+    public RoomNode Find(int id) // find what roomnode is when we give it id
     {
         
-        foreach (var list in graph)
+        foreach (var list in graph) //search throgh each list
         {
-            if (list.First.Value.getRoom() == room)
+            if (list.First.Value.getId() == id) //checks if this room is the one we r looking for 
             {
-                return list;
+                return list.First.Value; //the room 
             }
         }
 

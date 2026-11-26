@@ -13,7 +13,7 @@ public class RoomNode
  
     }
 
-    public LinkedList<RoomNode> connections; //list for connections 
+    public LinkedList<RoomNode> connections; //list for connections . each room gets its own list of empty connections. 
     
     private roomType room;
     private int id;

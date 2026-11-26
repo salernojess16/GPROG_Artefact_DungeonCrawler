@@ -2,15 +2,8 @@ using UnityEngine;
 
 public class DungeonGeneration : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+// this script creates the graph itsemf by generatung the roomms themselves annd connects them.
+//i want to spawn 8 rooms using insert() and addedge()
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //i want controlled randomness following the 8 rooms and how many i want per game 
 }
