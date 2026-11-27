@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -9150489477472823759, guid: 3c74ced9aa020814d8376dacdd98bc38, type: 3}
-  m_Color: {r: 0.3773585, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   hp: 100
-  speed: 4
+  speed: 4.3
   damage: 30
   attackDamage: 10
   isKnockedback: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
   rb: {fileID: 7463436920205431525}
   enemyStats: {fileID: 384887756417657173}
   coinPrefab: {fileID: 7772101356442774313, guid: 915d50913be48b94284d7c51fa03b51e, type: 3}
-  playerDistance: 2
+  playerDistance: 3.5
 --- !u!82 &7948051259324025322
 AudioSource:
   m_ObjectHideFlags: 0

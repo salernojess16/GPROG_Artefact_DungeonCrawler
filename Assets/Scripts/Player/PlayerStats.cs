@@ -7,12 +7,13 @@ public class PlayerStats : MonoBehaviour
 
     public float speed = 5f;
     public float hp = 100f;
+    private float maxHp = 100f;
     private float damage = 10f;
     public bool isKnockedback = false;
     private float knockbackTimer;
     public float knockbackLength = 0.5f;
     public float knockbackForce = 8f;
-
+    public float heal = 15;
     public bool isDead = false;
 
     public AudioSource hurtSound;
@@ -62,5 +63,16 @@ public float GetSpeed()
         hurtSound.Play();
     }
 
-  
+    public void Heal()
+    {
+        hp += heal;
+
+        if (hp > maxHp)
+        {
+            hp = maxHp;
+        }
+    }
+
+
+
 }
