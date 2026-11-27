@@ -18,4 +18,29 @@ public class RendererDungeon : MonoBehaviour
     public GameObject doorBlocker;
 
     //need to make it so i can make the room types connect with the prefanbs 
+
+    private GameObject AssignPrefab(RoomNode.roomType type)
+    {
+        if (type == RoomNode.roomType.Spawn)
+        {
+            return spawnPrefab;
+        }
+
+        if (type == RoomNode.roomType.Normal)
+        {
+            return NormalPrefab;
+        }
+
+        if (type == RoomNode.roomType.Healing)
+        {
+            return HealingPrefab;
+        }
+
+        if (type == RoomNode.roomType.Boss)
+        {
+            return BossPrefab;
+        }
+
+            return null;
+    }
 }
